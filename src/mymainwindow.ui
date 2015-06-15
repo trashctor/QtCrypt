@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MyMainWindow</class>
+ <widget class="QMainWindow" name="MyMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>672</width>
+    <height>538</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MyMainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QPushButton" name="add_file">
+        <property name="text">
+         <string>Add file(s)...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="add_directory">
+        <property name="text">
+         <string>Add directory...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="uncheck_all">
+        <property name="text">
+         <string>Uncheck all items</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="check_all">
+        <property name="text">
+         <string>Check all items</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="remove_checked">
+        <property name="text">
+         <string>Remove checked items</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="delete_checked">
+        <property name="text">
+         <string>Delete checked items</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QCheckBox" name="auto_resize">
+          <property name="text">
+           <string>Auto resize columns</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="save_list">
+          <property name="text">
+           <string>Save item list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="load_list">
+          <property name="text">
+           <string>Load item list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="refresh_view">
+          <property name="text">
+           <string>Refresh view</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTreeView" name="tree_view">
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="encrypt">
+        <property name="text">
+         <string>Encrypt</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="decrypt">
+        <property name="text">
+         <string>Decrypt</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="password_1"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="show_password">
+        <property name="text">
+         <string>Show password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="password_0"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="password_label">
+        <property name="text">
+         <string>Password:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="delete_success">
+        <property name="text">
+         <string>Delete original item after encryption/decryption</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="encrypt_rename">
+        <property name="text">
+         <string>Rename encrypted item(s) to:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="encrypt_filename"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="percent_label">
+        <property name="text">
+         <string>_%, %={0,1,2,...}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>672</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>add_file</tabstop>
+  <tabstop>add_directory</tabstop>
+  <tabstop>check_all</tabstop>
+  <tabstop>uncheck_all</tabstop>
+  <tabstop>save_list</tabstop>
+  <tabstop>load_list</tabstop>
+  <tabstop>refresh_view</tabstop>
+  <tabstop>remove_checked</tabstop>
+  <tabstop>delete_checked</tabstop>
+  <tabstop>auto_resize</tabstop>
+  <tabstop>encrypt</tabstop>
+  <tabstop>decrypt</tabstop>
+  <tabstop>password_0</tabstop>
+  <tabstop>password_1</tabstop>
+  <tabstop>show_password</tabstop>
+  <tabstop>encrypt_rename</tabstop>
+  <tabstop>encrypt_filename</tabstop>
+  <tabstop>delete_success</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
