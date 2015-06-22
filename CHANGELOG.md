@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.0.1] - 2015-6-22
+### Fixed
+- Fixed bug related to not creating a temp directory and session.qtlist file if they didn't exist.
+
 ## [2.0.0] - 2015-6-22
 ### Fixed
 - Fixed issue with modifying blocks of data within encrypted file, this will cause backwards incompatibility with files encrypted by previous version of QtCrypt.

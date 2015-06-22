@@ -66,6 +66,19 @@ MyMainWindow::MyMainWindow(QWidget *parent) :
 
 	ui->encrypt_filename->setMaxLength(MAX_ENCRYPT_NAME_LENGTH);
 	ui->auto_resize->setChecked(true);
+
+	// create the temp directory and session.qtlist if they don't exist already
+	QDir curr_dir = QDir::current();
+	QFile list_file(DEFAULT_LIST_PATH);
+
+	if(!curr_dir.exists(QString("temp")))
+		curr_dir.mkdir(QString("temp"));
+
+	if(!list_file.exists())
+	{
+		list_file.open(QIODevice::WriteOnly);
+		list_file.close();
+	}
 }
 
 
