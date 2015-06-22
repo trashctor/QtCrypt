@@ -143,7 +143,7 @@ QString MyDecryptBar::errorCodeToString(int error_code)
 
 		case SRC_HEADER_DECRYPT_ERROR:
 			ret_string += "The encrypted file header could not be decrypted! Password is most likely "
-				"incorrect.";
+				"incorrect or the header has been modified.";
 			break;
 
 		case DES_FILE_EXISTS:
@@ -163,8 +163,8 @@ QString MyDecryptBar::errorCodeToString(int error_code)
 			break;
 
 		case DATA_DECRYPT_ERROR:
-			ret_string += "The encrypted file's data could not be decrypted! Password is most likely "
-				"incorrect";
+			ret_string += "The encrypted file's data could not be decrypted! The data has most likely "
+				"been modified.";
 			break;
 
 		case DES_BODY_WRITE_ERROR:
@@ -176,7 +176,7 @@ QString MyDecryptBar::errorCodeToString(int error_code)
 			break;
 
 		case ZIP_ERROR:
-			ret_string += "The file or directory could not be unzipped!";
+			ret_string += "The intermediate file could not be unzipped!";
 			break;
 
 		case NOT_STARTED:

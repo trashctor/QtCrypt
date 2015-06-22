@@ -162,57 +162,48 @@ void MyDecryptThread::runHelper()
 			// otherwise, decryption was successful. unzip the file into the encrypted file's directory
 			else
 			{
-				QString unzip_dir;
-				bool exists = false;
-
 				QuaZip qz(decrypt_path);
-				qz.open(QuaZip::mdUnzip);
 
-				// check what item type the zipped file is from the embedded comment
-				QString item_type = qz.getComment();
-
-				if(item_type == MyFileInfo::typeToString(MyFileInfoPublic::MFIT_FILE))
+				if(QFileInfo::exists(unzip_path))
+					status_list[i] = ZIP_ERROR;
+				else if(qz.open(QuaZip::mdUnzip))
 				{
-					// directory to extract zip to
-					unzip_dir = QDir::cleanPath(item_list[i]->getPath());
+					// check what item type the zipped file is from the embedded comment. depending on the
+					// type, change the directory to extract the zip to
 
-					// make sure the file doesn't already exist
-					QFileInfo fi(unzip_path);
-					if(fi.exists() && fi.isFile())
-						exists = true;
-				}
-				else
-				{
-					unzip_dir = QDir::cleanPath(item_list[i]->getPath() + "/" + unzip_name);
-
-					// make sure the directory doesn't already exist
-					QFileInfo fi(unzip_path);
-					if(fi.exists() && fi.isDir())
-						exists = true;
-				}
-
-				qz.close();
-
-				if(exists == true)
-					status_list[i] = DES_FILE_EXISTS;
-				else if(JlCompress::extractDir(decrypt_path, unzip_dir).size() != 0)
-				{
-					// unzipping was a success, process is finished. add in the decrypted item
-					status_list[i] = CRYPT_SUCCESS;
+					QString item_type = qz.getComment();
+					QString unzip_dir;
 
 					if(item_type == MyFileInfo::typeToString(MyFileInfoPublic::MFIT_FILE))
-						ptr_model->insertItem(ptr_model->rowCount(), unzip_path);
+						unzip_dir = QDir::cleanPath(item_list[i]->getPath());
 					else
-						ptr_model->insertItem(0, unzip_path);
+						unzip_dir = QDir::cleanPath(item_list[i]->getPath() + "/" + unzip_name);
 
-					// remove the encrypted file from the model if the user chose the option to
-					if(delete_success)
+					qz.close();
+
+					// unzip to target directory
+					if(JlCompress::extractDir(decrypt_path, unzip_dir).size() != 0)
 					{
-						if(QFile::remove(full_path))
-							ptr_model->removeItem(full_path);
+						// unzipping was a success, process is finished. add in the decrypted item
+						status_list[i] = CRYPT_SUCCESS;
+
+						if(item_type == MyFileInfo::typeToString(MyFileInfoPublic::MFIT_FILE))
+							ptr_model->insertItem(ptr_model->rowCount(), unzip_path);
+						else
+							ptr_model->insertItem(0, unzip_path);
+
+						// remove the encrypted file from the model if the user chose the option to
+						if(delete_success)
+						{
+							if(QFile::remove(full_path))
+								ptr_model->removeItem(full_path);
+						}
 					}
+					// otherwise, there was a problem unzipping the decrypted file
+					else
+						status_list[i] = ZIP_ERROR;
 				}
-				// otherwise, there was a problem unzipping the decrypted file
+				// could not open the decrypted zip file
 				else
 					status_list[i] = ZIP_ERROR;
 			}
@@ -220,7 +211,6 @@ void MyDecryptThread::runHelper()
 			// clean up the decrypted zip file
 			QFile::remove(decrypt_path);
 		}
-
 		// was not a qtcrypt file
 		else
 			status_list[i] = NOT_QTCRYPT;
